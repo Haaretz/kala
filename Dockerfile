@@ -1,8 +1,8 @@
-FROM golang
+FROM golang:1.14
 
 WORKDIR /go/src/github.com/ajvb/kala
 COPY . .
 RUN go build && mv kala /usr/bin
 
-CMD ["kala", "serve"]
+CMD ["./run.sh"]
 EXPOSE 8000

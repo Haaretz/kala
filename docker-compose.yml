@@ -1,25 +1,24 @@
 version: '3'
 
 services:
-  consul:
-    image: progrium/consul
-    ports:
-      - "8500:8500"
-    command: "-server -bootstrap"
-  redis:
-    image: redis:4
-    ports:
-      - "6379:6379"
   mongo:
-    image: mongo:3.4
+    image: mongo:4.2
     ports:
       - "27017:27017"
-  postgres:
-    image: postgres:10
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=root"
+      - "MONGO_INITDB_ROOT_PASSWORD=123456"
+  kala:
+    build: .
+    image: eu.gcr.io/htz-common/kala:0.0.1
     ports:
-      - "5432:5432"
-  mysql:
-    image: mysql:5.7
-    ports:
-      - "3306:3306"
+      - "8000:8000"
+    environment:
+      - "JOBDB=mongo"
+      - "JOBDB_ADDRESS=mongo"
+      - "JOBDB_USERNAME=root"
+      - "JOBDB_PASSWORD=123456"
+
+    
+
 
